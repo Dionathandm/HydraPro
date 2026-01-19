@@ -73,6 +73,22 @@ footer{
   color:#ccc
 }
 footer a{color:#0af}
+.install-btn{
+  position:fixed;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#0f0;
+  color:#000;
+  border:none;
+  padding:14px 22px;
+  font-size:16px;
+  font-weight:bold;
+  border-radius:30px;
+  box-shadow:0 0 15px rgba(0,255,0,.4);
+  z-index:9999;
+  display:none;
+}  
 </style>
 </head>
 
@@ -126,9 +142,33 @@ footer a{color:#0af}
 © 2026 HydraPro – Dionathan Duarte Martins
 </footer>
 
+<button id="btnInstall" class="install-btn">📥 Instalar App</button>
+
 <script>
+let deferredPrompt;
+const btnInstall = document.getElementById('btnInstall');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  btnInstall.style.display = 'block';
+});
+
+btnInstall.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      btnInstall.style.display = 'none';
+    }
+    deferredPrompt = null;
+  }
+});
+
 // Service Worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
