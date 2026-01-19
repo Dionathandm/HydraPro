@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>HydraPro | Apps & Entretenimento</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#000;color:#fff}
+a{text-decoration:none;color:inherit}
+
+/* BLOQUEIOS */
+img{-webkit-user-drag:none;user-select:none}
+
+header{padding:20px;text-align:center;background:#000}
+header h1{font-size:26px}
+header p{color:#aaa;margin-top:8px}
+
+.hero{position:relative;height:60vh;background:url('https://i.ibb.co/KjcLf07v/file-0000000092f8720eb6db654b819a8a71.png') center/cover no-repeat}
+.hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.65)}
+.hero-content{position:absolute;bottom:40px;left:20px;z-index:2}
+.hero-content h2{font-size:28px}
+.hero-content .ad{
+  margin-top:10px;
+  background:#111;
+  padding:12px;
+  border-radius:6px;
+  border:1px dashed #444;
+  color:#0f0
+}
+
+.apps{padding:40px 20px;display:grid;gap:20px}
+.app-card{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:16px;
+  align-items:center;
+  background:#111;
+  padding:16px;
+  border-radius:10px;
+}
+.app-card img{width:80px;border-radius:10px}
+.app-card h3{margin-bottom:6px}
+.app-card a{
+  background:red;
+  padding:10px 14px;
+  border-radius:6px;
+  font-weight:bold
+}
+.app-card.music a{background:#1f6f43}
+
+footer{
+  padding:30px 20px;
+  background:#000;
+  border-top:1px solid #222;
+  font-size:14px;
+  color:#ccc
+}
+footer a{color:#0af}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>HydraPro</h1>
+  <p>Entretenimento digital em evolução</p>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Seu anúncio pode aparecer aqui</h2>
+    <div class="ad">📢 Divulgue aqui seu produto ou serviço<br>📩 Contato para parcerias</div>
+  </div>
+</section>
+
+<section class="apps">
+
+  <div class="app-card">
+    <img src="https://i.ibb.co/r22ZV0kv/lv-0-20260116051448.png">
+    <div>
+      <h3>HydraFilmes</h3>
+      <p>Filmes online em versão beta totalmente funcional.</p>
+    </div>
+    <a href="https://dionathandm.github.io/hydrafilmes/" target="_blank">Acessar</a>
+  </div>
+
+  <div class="app-card music">
+    <img src="https://i.ibb.co/60KP16PJ/lv-0-20260117003207.png">
+    <div>
+      <h3>HydraMusic</h3>
+      <p>Streaming musical independente.</p>
+    </div>
+    <a href="https://dionathandm.github.io/hydramusic/" target="_blank">Acessar</a>
+  </div>
+
+</section>
+
+<footer>
+🚧 <strong>HydraFilmes – Beta totalmente funcional!</strong><br>
+💼 Estamos em busca de patrocinadores e parceiros para crescer o projeto.<br>
+👉 <a href="https://dionathandm.github.io/hydrafilmes/">HydraFilmes</a><br><br>
+🎵 <strong>HydraMusic também está disponível:</strong><br>
+👉 <a href="https://dionathandm.github.io/hydramusic/">HydraMusic</a><br><br>
+© 2026 HydraPro – Dionathan Duarte Martins
+</footer>
+
+<script>
+// Service Worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script>
+
+</body>
+</html>
