@@ -16,30 +16,16 @@
   padding:16px;
   background:#000;
 }
-
-.topo img{
-  height:42px;
-}
-
-.topo h1{
-  font-size:24px;
-  font-weight:bold;
-}
+.topo img{height:42px}
+.topo h1{font-size:24px;font-weight:bold}
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#000;color:#fff}
 a{text-decoration:none;color:inherit}
 
 /* BLOQUEIOS */
-img{
-  -webkit-user-drag:none;
-  user-select:none;
-  -webkit-touch-callout:none;
-}
-
-a{
-  -webkit-touch-callout:none;
-}
+img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+a{-webkit-touch-callout:none}
 
 .hero{
   position:relative;
@@ -95,6 +81,33 @@ a{
 }
 .app-card.music a{background:#1f6f43}
 
+/* CARD SPOTIFY */
+.spotify-card{
+  max-width:300px;
+  margin:20px auto 0 auto;
+}
+.spotify-box{
+  background:#1DB954;
+  border-radius:12px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+}
+.spotify-box img{
+  width:42px;
+  height:42px;
+}
+.spotify-box div{
+  flex:1;
+  color:#000;
+}
+.spotify-box span{
+  font-size:18px;
+  color:#000;
+}
+
 footer{
   padding:30px 20px;
   background:#000;
@@ -126,7 +139,7 @@ footer a{color:#0af}
 <body>
 
 <header class="topo">
-  <img src="https://i.ibb.co/0VBBMfrZ/lv-0-20260119011237.png" alt="HydraPro Logo">
+  <img src="https://i.ibb.co/0VBBMfrZ/lv-0-20260119011237.png">
   <h1>HydraPro</h1>
 </header>
 
@@ -135,9 +148,7 @@ footer a{color:#0af}
     <h2>Seu anúncio pode aparecer aqui</h2>
     <div class="ad">
       📢 Divulgue aqui seu produto ou serviço<br>
-      📩 <a href="https://wa.me/5547988397589" target="_blank">
-        Contato para parcerias
-      </a>
+      📩 <a href="https://wa.me/5547988397589" target="_blank">Contato para parcerias</a>
     </div>
   </div>
 </section>
@@ -162,31 +173,36 @@ footer a{color:#0af}
     <a href="https://dionathandm.github.io/hydramusic/" target="_blank">Acessar</a>
   </div>
 
+  <!-- SPOTIFY EXTERNO -->
+  <div class="spotify-card">
+    <div class="spotify-box"
+      onclick="window.open('https://open.spotify.com/user/31wzj7qo5znn7dk4egwiwxfh3k4u?si=xBARBoxkSMWrGqCxCyMFNw','_blank')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg">
+      <div>
+        <strong>Meu Spotify</strong><br>
+        <small>Abre fora do HydraMusic</small>
+      </div>
+      <span>↗</span>
+    </div>
+  </div>
+
 </section>
 
 <footer>
 🚧 <strong>HydraFilmes – Beta totalmente funcional!</strong><br>
-💼 Estamos em busca de patrocinadores e parceiros para crescer o projeto.<br>
-👉 <a href="https://dionathandm.github.io/hydrafilmes/">HydraFilmes</a><br><br>
-🎵 <strong>HydraMusic também está disponível:</strong><br>
-👉 <a href="https://dionathandm.github.io/hydramusic/">HydraMusic</a><br><br>
+💼 Buscamos patrocinadores e parceiros.<br><br>
 © 2026 HydraPro – Dionathan Duarte Martins
 </footer>
 
 <button id="btnInstall" class="install-btn">📥 Instalar App</button>
 
 <script>
-/* BLOQUEAR MENU DE CONTEXTO (segurar dedo) */
 document.addEventListener('contextmenu', e => e.preventDefault());
 
-/* BLOQUEAR TOQUE PROLONGADO EM IMAGENS */
 document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('touchstart', e => {
-    e.preventDefault();
-  }, { passive:false });
+  img.addEventListener('touchstart', e => e.preventDefault(), { passive:false });
 });
 
-/* BOTÃO INSTALAR PWA */
 let deferredPrompt;
 const btnInstall = document.getElementById('btnInstall');
 
@@ -204,7 +220,6 @@ btnInstall.addEventListener('click', async () => {
   deferredPrompt = null;
 });
 
-/* SERVICE WORKER */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
