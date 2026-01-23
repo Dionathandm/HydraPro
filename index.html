@@ -40,6 +40,7 @@ a{-webkit-touch-callout:none}
   width:100%;
   max-height:60vh;
   object-fit:contain;
+  background:#000;
 }
 .play-btn{
   position:absolute;
@@ -57,6 +58,29 @@ a{-webkit-touch-callout:none}
 }
 .play-btn:hover{
   opacity:1;
+}
+
+/* BOTÃO CENTRAL */
+.center-play-btn{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  z-index:4;
+  background:rgba(0,255,0,0.8);
+  color:#000;
+  border:none;
+  padding:20px 28px;
+  font-size:20px;
+  font-weight:bold;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.center-play-btn:hover{
+  background:rgba(0,255,0,1);
 }
 
 /* CONTEÚDO ABAIXO DO VÍDEO */
@@ -173,10 +197,16 @@ footer a{color:#0af}
 
 <!-- HERO COM VÍDEO -->
 <section class="hero">
-  <video id="welcomeVideo" autoplay loop playsinline preload="metadata">
+  <video id="welcomeVideo" autoplay loop playsinline preload="metadata" muted>
     <source src="lv_0_20260122231858.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos HTML5.
   </video>
+
+  <!-- BOTÃO SOM -->
   <button class="play-btn" onclick="toggleVideoAudio()">🔊 Som</button>
+
+  <!-- BOTÃO CENTRAL PLAY -->
+  <button id="centerPlay" class="center-play-btn">▶️</button>
 </section>
 
 <!-- TEXTO ABAIXO DO VÍDEO -->
@@ -270,6 +300,16 @@ function toggleVideoAudio(){
     vid.muted = true;
   }
 }
+
+// BOTÃO CENTRAL PLAY
+const centerPlay = document.getElementById('centerPlay');
+const video = document.getElementById('welcomeVideo');
+
+centerPlay.addEventListener('click', () => {
+  video.muted = false;
+  video.play();
+  centerPlay.style.display = 'none';
+});
 </script>
 
 </body>
