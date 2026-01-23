@@ -32,25 +32,15 @@ a{-webkit-touch-callout:none}
 /* HERO */
 .hero{
   position:relative;
-  height:auto; /* altura automática */
-  overflow:hidden;
+  width:100%;
   display:flex;
   justify-content:center;
 }
 .hero video{
   width:100%;
-  max-height:60vh; /* vídeo com altura menor */
+  max-height:60vh;
   object-fit:contain;
 }
-.hero::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.1);
-  pointer-events:none;
-}
-
-/* BOTÃO DE ÁUDIO */
 .play-btn{
   position:absolute;
   top:10px;
@@ -181,15 +171,15 @@ footer a{color:#0af}
   <h1>HydraPro</h1>
 </header>
 
+<!-- HERO COM VÍDEO -->
 <section class="hero">
-  <!-- VÍDEO -->
-  <video id="welcomeVideo" loop playsinline>
+  <video id="welcomeVideo" loop playsinline preload="metadata">
     <source src="lv_0_20260122231858.mp4" type="video/mp4">
   </video>
   <button class="play-btn" onclick="toggleVideoAudio()">🔊 Som</button>
 </section>
 
-<!-- CONTEÚDO ABAIXO DO VÍDEO -->
+<!-- TEXTO ABAIXO DO VÍDEO -->
 <div class="hero-text-container">
   <h2>Obrigado por acessar o HydraPro!</h2>
   <div class="ad">
@@ -198,6 +188,7 @@ footer a{color:#0af}
   </div>
 </div>
 
+<!-- APPS -->
 <section class="apps">
 
   <div class="app-card">
@@ -242,7 +233,7 @@ footer a{color:#0af}
 <button id="btnInstall" class="install-btn">📥 Instalar App</button>
 
 <script>
-// BLOQUEIO DE CONTEXTO E TOUCH
+// BLOQUEIOS
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.querySelectorAll('img').forEach(img => {
   img.addEventListener('touchstart', e => e.preventDefault(), { passive:false });
@@ -269,7 +260,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
 
-// FUNÇÃO SOM
+// FUNÇÃO DE ÁUDIO DO VÍDEO
 function toggleVideoAudio(){
   const vid = document.getElementById('welcomeVideo');
   if(vid.muted){
