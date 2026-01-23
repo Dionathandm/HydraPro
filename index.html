@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#000000">
 
 <style>
+/* TOPO */
 .topo{
   display:flex;
   align-items:center;
@@ -19,6 +20,7 @@
 .topo img{height:42px}
 .topo h1{font-size:24px;font-weight:bold}
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#000;color:#fff}
 a{text-decoration:none;color:inherit}
@@ -30,44 +32,51 @@ a{-webkit-touch-callout:none}
 /* HERO */
 .hero{
   position:relative;
-  height:50vh; /* diminuído para aparecer legendas */
+  height:45vh; /* mais baixo para ver legenda */
   overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 }
 .hero video{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;
+  max-height:100%;
+  object-fit:contain; /* mantém proporção e legenda visível */
 }
 .hero::after{
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.2); /* leve escurecimento para o texto */
+  background:rgba(0,0,0,0.1);
+  pointer-events:none;
 }
+
+/* CONTAINER DO CONTEÚDO DO HERO */
 .hero-content{
   position:absolute;
-  bottom:20px;
+  bottom:10px;
   left:20px;
   z-index:2;
-  background:rgba(0,0,0,0.4); /* fundo semi-transparente para não cobrir legendas */
-  padding:10px;
-  border-radius:6px;
+  width:calc(100% - 40px);
 }
 .hero-content h2{
   font-size:24px;
   color:#fff;
   margin-bottom:6px;
+  text-shadow: 1px 1px 6px #000;
 }
 .hero-content .ad{
   margin-top:6px;
-  background:#111;
+  background:rgba(0,0,0,0.6);
   padding:8px;
   border-radius:6px;
-  border:1px dashed #444;
-  color:#0f0
+  border:1px dashed #0f0;
+  color:#0f0;
+  font-size:14px;
 }
 
-/* BOTÃO DE PLAY PARA ÁUDIO */
+/* BOTÃO DE ÁUDIO */
 .play-btn{
   position:absolute;
   top:10px;
@@ -80,13 +89,17 @@ a{-webkit-touch-callout:none}
   font-weight:bold;
   border-radius:20px;
   cursor:pointer;
+  opacity:0.8;
+}
+.play-btn:hover{
+  opacity:1;
 }
 
 /* APPS */
 .apps{
   padding:40px 20px;
   display:grid;
-  gap:20px
+  gap:20px;
 }
 .app-card{
   display:grid;
@@ -137,6 +150,7 @@ a{-webkit-touch-callout:none}
   color:#000;
 }
 
+/* FOOTER */
 footer{
   padding:30px 20px;
   background:#000;
@@ -146,6 +160,7 @@ footer{
 }
 footer a{color:#0af}
 
+/* BOTÃO DE INSTALAÇÃO */
 .install-btn{
   position:fixed;
   bottom:16px;
@@ -173,11 +188,11 @@ footer a{color:#0af}
 </header>
 
 <section class="hero">
-  <!-- VÍDEO DE BOAS-VINDAS -->
+  <!-- VÍDEO -->
   <video id="welcomeVideo" loop playsinline>
     <source src="lv_0_20260122231858.mp4" type="video/mp4">
   </video>
-  <button class="play-btn" onclick="toggleVideoAudio()">🔊 Ativar Som</button>
+  <button class="play-btn" onclick="toggleVideoAudio()">🔊 Som</button>
   <div class="hero-content">
     <h2>Obrigado por acessar o HydraPro!</h2>
     <div class="ad">
@@ -207,7 +222,7 @@ footer a{color:#0af}
     <a href="https://dionathandm.github.io/hydramusic/" target="_blank">Acessar</a>
   </div>
 
-  <!-- SPOTIFY EXTERNO -->
+  <!-- SPOTIFY -->
   <div class="spotify-card">
     <div class="spotify-box"
       onclick="window.open('https://open.spotify.com/user/31wzj7qo5znn7dk4egwiwxfh3k4u?si=xBARBoxkSMWrGqCxCyMFNw','_blank')">
@@ -231,21 +246,20 @@ footer a{color:#0af}
 <button id="btnInstall" class="install-btn">📥 Instalar App</button>
 
 <script>
+// BLOQUEIO DE CONTEXTO E TOUCH
 document.addEventListener('contextmenu', e => e.preventDefault());
-
 document.querySelectorAll('img').forEach(img => {
   img.addEventListener('touchstart', e => e.preventDefault(), { passive:false });
 });
 
+// INSTALL BUTTON
 let deferredPrompt;
 const btnInstall = document.getElementById('btnInstall');
-
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
   btnInstall.style.display = 'block';
 });
-
 btnInstall.addEventListener('click', async () => {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
@@ -254,11 +268,12 @@ btnInstall.addEventListener('click', async () => {
   deferredPrompt = null;
 });
 
+// SERVICE WORKER
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
 
-// Função para ativar áudio
+// FUNÇÃO SOM
 function toggleVideoAudio(){
   const vid = document.getElementById('welcomeVideo');
   if(vid.muted){
