@@ -27,16 +27,22 @@ a{text-decoration:none;color:inherit}
 img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 a{-webkit-touch-callout:none}
 
+/* HERO */
 .hero{
   position:relative;
   height:60vh;
-  background:url('https://i.ibb.co/KjcLf07v/file-0000000092f8720eb6db654b819a8a71.png') center/cover no-repeat
+  overflow:hidden;
+}
+.hero video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .hero::after{
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.65)
+  background:rgba(0,0,0,.35);
 }
 .hero-content{
   position:absolute;
@@ -44,7 +50,7 @@ a{-webkit-touch-callout:none}
   left:20px;
   z-index:2
 }
-.hero-content h2{font-size:28px}
+.hero-content h2{font-size:28px;color:#fff}
 .hero-content .ad{
   margin-top:10px;
   background:#111;
@@ -144,8 +150,12 @@ footer a{color:#0af}
 </header>
 
 <section class="hero">
+  <!-- VÍDEO DE BOAS-VINDAS -->
+  <video autoplay muted loop playsinline>
+    <source src="lv_0_20260122231858.mp4" type="video/mp4">
+  </video>
   <div class="hero-content">
-    <h2>Seu anúncio pode aparecer aqui</h2>
+    <h2>Obrigado por acessar o HydraPro!</h2>
     <div class="ad">
       📢 Divulgue aqui seu produto ou serviço<br>
       📩 <a href="https://wa.me/5547988397589" target="_blank">Contato para parcerias</a>
