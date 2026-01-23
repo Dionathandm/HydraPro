@@ -8,6 +8,14 @@
 <meta name="theme-color" content="#000000">
 
 <style>
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+  background:#000 url('https://i.ibb.co/XYZ/PeterPanBG.png') no-repeat center center fixed;
+  background-size:cover;
+  color:#fff;
+}
+
 /* TOPO */
 .topo{
   display:flex;
@@ -20,11 +28,6 @@
 .topo img{height:42px}
 .topo h1{font-size:24px;font-weight:bold}
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#000;color:#fff}
-a{text-decoration:none;color:inherit}
-
 /* BLOQUEIOS */
 img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 a{-webkit-touch-callout:none}
@@ -35,36 +38,8 @@ a{-webkit-touch-callout:none}
   width:100%;
   display:flex;
   justify-content:center;
+  margin-top:20px;
 }
-.hero img{
-  width:100%;
-  max-height:60vh;
-  object-fit:contain;
-}
-.hero video{
-  width:100%;
-  max-height:60vh;
-  object-fit:contain;
-}
-.play-btn{
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:3;
-  background:#0f0;
-  color:#000;
-  border:none;
-  padding:8px 12px;
-  font-weight:bold;
-  border-radius:20px;
-  cursor:pointer;
-  opacity:0.8;
-}
-.play-btn:hover{
-  opacity:1;
-}
-
-/* CONTEÚDO ABAIXO DO VÍDEO */
 .hero-text-container{
   padding:16px 20px;
   text-align:center;
@@ -97,22 +72,22 @@ a{-webkit-touch-callout:none}
   align-items:center;
   background:#111;
   padding:16px;
-  border-radius:10px
+  border-radius:10px;
 }
 .app-card img{
   width:80px;
-  border-radius:10px
+  border-radius:10px;
 }
 .app-card h3{margin-bottom:6px}
 .app-card a{
   background:red;
   padding:10px 14px;
   border-radius:6px;
-  font-weight:bold
+  font-weight:bold;
 }
 .app-card.music a{background:#1f6f43}
 
-/* CARD SPOTIFY */
+/* SPOTIFY */
 .spotify-card{
   max-width:300px;
   margin:20px auto 0 auto;
@@ -145,7 +120,7 @@ footer{
   background:#000;
   border-top:1px solid #222;
   font-size:14px;
-  color:#ccc
+  color:#ccc;
 }
 footer a{color:#0af}
 
@@ -172,21 +147,11 @@ footer a{color:#0af}
 <body>
 
 <header class="topo">
-  <!-- Imagem Peter Pan como antes -->
-  <img src="https://i.ibb.co/PeterPanExample.png" alt="Peter Pan">
+  <img src="https://i.ibb.co/0VBBMfrZ/lv-0-20260119011237.png" alt="Logo HydraPro">
   <h1>HydraPro</h1>
 </header>
 
-<!-- HERO COM VÍDEO -->
-<section class="hero">
-  <video id="welcomeVideo" autoplay loop playsinline preload="metadata" muted>
-    <source src="lv_0_20260122231858.mp4" type="video/mp4">
-    Seu navegador não suporta vídeos HTML5.
-  </video>
-  <button class="play-btn" onclick="toggleVideoAudio()">🔊 Som</button>
-</section>
-
-<!-- TEXTO ABAIXO DO VÍDEO -->
+<!-- TEXTO DE AGRADECIMENTO / ANUNCIANTE -->
 <div class="hero-text-container">
   <h2>Obrigado por acessar o HydraPro!</h2>
   <div class="ad">
@@ -197,9 +162,8 @@ footer a{color:#0af}
 
 <!-- APPS -->
 <section class="apps">
-
   <div class="app-card">
-    <img src="https://i.ibb.co/r22ZV0kv/lv-0-20260116051448.png">
+    <img src="https://i.ibb.co/r22ZV0kv/lv-0-20260116051448.png" alt="HydraFilmes">
     <div>
       <h3>HydraFilmes</h3>
       <p>Filmes online em versão beta totalmente funcional.</p>
@@ -208,7 +172,7 @@ footer a{color:#0af}
   </div>
 
   <div class="app-card music">
-    <img src="https://i.ibb.co/60KP16PJ/lv-0-20260117003207.png">
+    <img src="https://i.ibb.co/60KP16PJ/lv-0-20260117003207.png" alt="HydraMusic">
     <div>
       <h3>HydraMusic</h3>
       <p>Streaming musical independente.</p>
@@ -220,7 +184,7 @@ footer a{color:#0af}
   <div class="spotify-card">
     <div class="spotify-box"
       onclick="window.open('https://open.spotify.com/user/31wzj7qo5znn7dk4egwiwxfh3k4u?si=xBARBoxkSMWrGqCxCyMFNw','_blank')">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
       <div>
         <strong>Meu Spotify</strong><br>
         <small>Abre fora do HydraMusic</small>
@@ -228,7 +192,6 @@ footer a{color:#0af}
       <span>↗</span>
     </div>
   </div>
-
 </section>
 
 <footer>
@@ -265,17 +228,6 @@ btnInstall.addEventListener('click', async () => {
 // SERVICE WORKER
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
-}
-
-// FUNÇÃO DE ÁUDIO DO VÍDEO
-function toggleVideoAudio(){
-  const vid = document.getElementById('welcomeVideo');
-  if(vid.muted){
-    vid.muted = false;
-    vid.play();
-  } else {
-    vid.muted = true;
-  }
 }
 </script>
 
