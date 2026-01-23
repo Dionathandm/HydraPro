@@ -30,7 +30,7 @@ a{-webkit-touch-callout:none}
 /* HERO */
 .hero{
   position:relative;
-  height:60vh;
+  height:50vh; /* diminuído para aparecer legendas */
   overflow:hidden;
 }
 .hero video{
@@ -42,24 +42,47 @@ a{-webkit-touch-callout:none}
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.2); /* leve escurecimento para o texto */
 }
 .hero-content{
   position:absolute;
-  bottom:40px;
+  bottom:20px;
   left:20px;
-  z-index:2
+  z-index:2;
+  background:rgba(0,0,0,0.4); /* fundo semi-transparente para não cobrir legendas */
+  padding:10px;
+  border-radius:6px;
 }
-.hero-content h2{font-size:28px;color:#fff}
+.hero-content h2{
+  font-size:24px;
+  color:#fff;
+  margin-bottom:6px;
+}
 .hero-content .ad{
-  margin-top:10px;
+  margin-top:6px;
   background:#111;
-  padding:12px;
+  padding:8px;
   border-radius:6px;
   border:1px dashed #444;
   color:#0f0
 }
 
+/* BOTÃO DE PLAY PARA ÁUDIO */
+.play-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:3;
+  background:#0f0;
+  color:#000;
+  border:none;
+  padding:8px 12px;
+  font-weight:bold;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* APPS */
 .apps{
   padding:40px 20px;
   display:grid;
@@ -151,9 +174,10 @@ footer a{color:#0af}
 
 <section class="hero">
   <!-- VÍDEO DE BOAS-VINDAS -->
-  <video autoplay muted loop playsinline>
+  <video id="welcomeVideo" loop playsinline>
     <source src="lv_0_20260122231858.mp4" type="video/mp4">
   </video>
+  <button class="play-btn" onclick="toggleVideoAudio()">🔊 Ativar Som</button>
   <div class="hero-content">
     <h2>Obrigado por acessar o HydraPro!</h2>
     <div class="ad">
@@ -232,6 +256,17 @@ btnInstall.addEventListener('click', async () => {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
+}
+
+// Função para ativar áudio
+function toggleVideoAudio(){
+  const vid = document.getElementById('welcomeVideo');
+  if(vid.muted){
+    vid.muted = false;
+    vid.play();
+  } else {
+    vid.muted = true;
+  }
 }
 </script>
 
